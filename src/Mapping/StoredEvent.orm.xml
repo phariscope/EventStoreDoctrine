@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Phariscope\EventStore\StoredEvent" table="events"
+        repository-class="Phariscope\EventStoreDoctrine\EventStoreDoctrine">
+        <id name="eventId" type="integer" column="event_id">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="eventBody" type="text" column="event_body"/>
+        <field name="typeName" type="string" column="type_name" length="255"/>
+        <field name="occurredOn" type="date_immutable_us" column="occurred_on"/>
+    </entity>
+</doctrine-mapping>
