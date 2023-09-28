@@ -6,16 +6,21 @@ composer require phariscope/event-store
 
 # Usage
 
-No direct usage. Just use this package if you want to develop your own event storage component.
+* first, be sure to have DATABASE_URL env var correctly initialized
+* first add the PersistEventSubscriber to the listeners as soon as you want
 
-To develop your own storage:
-* implement StoreInteface
-* create your subscriber extending PersistEventSubscriberAbstract
-* register your subscriber when needed
+Enjoy. And observe an 'events' table which contains all published events.
 
-A sample of StoreInterface is given StoreEventInMemory. You can use it for tests purposes
+```php
+    // Assume env var is intiailized.
+    // Example DATABASE_URL=mysql://root:pwd1234@mariadb:3306/ap-prod?serverVersion=mariadb-10.9.3&amp;charset=utf8mb4
 
-# To Contribut to pharsicope/Event
+    $store = new EventStoreDoctrine();
+    $subscriber = new PersistDoctrineEventSubscriber($store);
+    EventPublisher::instance()->subscribe($subscriber);
+```
+
+# To Contribut to pharsicope/EventStoreDoctrine
 
 ## Requirements
 
@@ -24,7 +29,7 @@ A sample of StoreInterface is given StoreEventInMemory. You can use it for tests
 
 ## Install
 
-* git clone git@github.com:phariscope/EventStore.git
+* git clone git@github.com:phariscope/EventStoreDoctrine.git
 
 ## Unit test
 
