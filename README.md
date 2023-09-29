@@ -6,8 +6,8 @@ composer require phariscope/event-store
 
 # Usage
 
-* first, be sure to have DATABASE_URL env var correctly initialized
-* first add the PersistEventSubscriber to the listeners as soon as you want
+* first, be sure to have DATABASE_URL environment variable correctly initialized
+* second, add the PersistEventSubscriber to the listeners as soon as you want
 
 Enjoy. And observe an 'events' table which contains all published events.
 
@@ -17,7 +17,7 @@ Enjoy. And observe an 'events' table which contains all published events.
 
     $store = new EventStoreDoctrine();
     $subscriber = new PersistDoctrineEventSubscriber($store);
-    EventPublisher::instance()->subscribe($subscriber);
+    EventPublisher::instance()->subscribe($subscriber); // use your own EventPublisherFacade could be a good idea
 ```
 
 # To Contribut to pharsicope/EventStoreDoctrine
