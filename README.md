@@ -6,10 +6,10 @@ composer require phariscope/event-store
 
 # Usage
 
-* first, be sure to have DATABASE_URL environment variable correctly initialized
-* second, add the PersistEventSubscriber to the listeners as soon as you want
+1. First, make sure to have the DATABASE_URL environment variable correctly initialized.
+2. Second, add the PersistEventSubscriber to the listeners as soon as you want.
 
-Enjoy. And observe an 'events' table which contains all published events.
+Enjoy, and observe an 'events' table that contains all published events.
 
 ```php
     // Assume env var is intiailized.
@@ -37,14 +37,14 @@ Enjoy. And observe an 'events' table which contains all published events.
 bin/phpunit
 ```
 
-with Test Developpment Driven (thanks Kent Beck and the others), good practices (thanks R.Martin and the others)
+with Test Developpment Driven (thanks Kent Beck and the others), good practices (thanks R.Martin and the others), great book "DDD in PHP" (C. Buenosvinos...)
 
 ## Quality
 
 * phpcs PSR12
 * phpstan level 9
 * coverage 100%
-* infection MSI >99%
+* infection MSI 100%
 
 Quick check with:
 ```console
@@ -58,6 +58,7 @@ bin/phpunit --coverage-html var
 and view 'var/index.html' with your browser
 
 Check infection with:
+
 ```console
 bin/infection
 ```
