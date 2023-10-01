@@ -11,6 +11,7 @@ use Phariscope\EventStore\Exceptions\EventNotFoundException;
 use Phariscope\EventStore\StoreInterface;
 use DateTimeImmutable;
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Schema\SchemaException;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver;
 use Doctrine\ORM\ORMSetup;
@@ -86,8 +87,9 @@ class EventStoreDoctrine extends EntityRepository implements StoreInterface
     {
         $em = $this->getEntityManager();
         $schemaManager = $em->getConnection()->createSchemaManager();
-        $schema = $schemaManager->introspectSchema();
-        if (!$schema->hasTable('events')) {
+        try {
+            $schemaManager->introspectTable('events');
+        } catch (SchemaException $e) {
             $tool = new SchemaTool($em);
             $tool->createSchema([$classMD]);
         }
