@@ -8,6 +8,13 @@ use Phariscope\EventStoreDoctrine\EventStoreDoctrine;
 
 class EventStoreDoctrineTestPurpose extends EventStoreDoctrine
 {
+    public function __construct(bool $construct = true)
+    {
+        if ($construct) {
+            parent::__construct();
+        }
+    }
+
     public function persistForcingEventIdForTestPurpose(EventAbstract $event, int $id): void
     {
         $storedEvent = new StoredEvent(

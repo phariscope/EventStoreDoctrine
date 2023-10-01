@@ -7,6 +7,8 @@ use Phariscope\EventStore\Exceptions\EventNotFoundException;
 use PHPUnit\Framework\TestCase;
 use Safe\DateTimeImmutable;
 
+use function Safe\putenv;
+
 class EventStoreDoctrineTest extends TestCase
 {
     /**
@@ -105,10 +107,18 @@ class EventStoreDoctrineTest extends TestCase
         $this->assertEquals(13, $storedEvents[2]->eventId());
     }
 
-    public function testEnvSafe(): void
+    public function testEnvSafePutEnv(): void
     {
         $this->expectExceptionMessage("DATABASE_URL must be initialised as a string env variable");
         $this->store = new EventStoreDoctrineTestPurpose();
         $this->store->getenvSafe("Bad");
+    }
+
+    public function testEnvSafeENV(): void
+    {
+        putenv('DATABASE_URL');
+        $_ENV['DATABASE_URL'] = 'expectedValue';
+        $this->store = new EventStoreDoctrineTestPurpose(false);
+        $this->assertEquals('expectedValue', $this->store->getenvSafe("DATABASE_URL"));
     }
 }
