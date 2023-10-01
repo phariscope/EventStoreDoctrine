@@ -2,24 +2,13 @@
 
 namespace Phariscope\EventStoreDoctrine;
 
-use Phariscope\Event\EventAbstract;
-use Phariscope\Event\EventSubscriber;
+use Phariscope\EventStore\PersistEventSubscriberAbstract;
 use Phariscope\EventStore\StoreInterface;
 
-class PersistDoctrineEventSubscriber implements EventSubscriber
+class PersistDoctrineEventSubscriber extends PersistEventSubscriberAbstract
 {
-    public function __construct(private StoreInterface $eventStore = new EventStoreDoctrine())
+    public function __construct(private StoreInterface $store = new EventStoreDoctrine())
     {
-    }
-
-    public function handle(EventAbstract $aDomainEvent): bool
-    {
-        $this->eventStore->append($aDomainEvent);
-        return true;
-    }
-
-    public function isSubscribedTo(EventAbstract $aDomainEvent): bool
-    {
-        return true;
+        parent::__construct($store);
     }
 }

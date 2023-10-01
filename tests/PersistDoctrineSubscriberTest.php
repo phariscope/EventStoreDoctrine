@@ -6,7 +6,7 @@ use Phariscope\EventStore\Persistence\StoreEventInMemory;
 use Phariscope\EventStoreDoctrine\PersistDoctrineEventSubscriber;
 use PHPUnit\Framework\TestCase;
 
-class PersistDomainSubscriberTest extends TestCase
+class PersistDoctrineSubscriberTest extends TestCase
 {
     public function testHandle(): void
     {

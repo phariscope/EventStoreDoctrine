@@ -37,7 +37,7 @@ Enjoy, and observe an 'events' table that contains all published events.
 bin/phpunit
 ```
 
-with Test Developpment Driven (thanks Kent Beck and the others), good practices (thanks R.Martin and the others), great book "DDD in PHP" (C. Buenosvinos...)
+Using Test-Driven Development (TDD) principles (thanks to Kent Beck and others), following good practices (thanks to Uncle Bob and others) and the great book 'DDD in PHP' by C. Buenosvinos, C. Soronellas, K. Akbary
 
 ## Quality
 
