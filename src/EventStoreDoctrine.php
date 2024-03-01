@@ -6,7 +6,6 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Phariscope\Event\EventAbstract;
 use Phariscope\EventStore\Exceptions\EventNotFoundException;
 use Phariscope\EventStore\StoreInterface;
 use DateTimeImmutable;
@@ -16,6 +15,7 @@ use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
+use Phariscope\Event\Psr14\Event;
 use Phariscope\EventStore\StoredEvent;
 use Phariscope\EventStoreDoctrine\Types\DateTimeWithMicrosecondsType;
 
@@ -97,10 +97,10 @@ class EventStoreDoctrine extends EntityRepository implements StoreInterface
 
     /**
      * No flush here. Flush outside please.
-     * @param EventAbstract $event
+     * @param Event $event
      * @return void
      */
-    public function append(EventAbstract $event): void
+    public function append(Event $event): void
     {
         $storedEvent = new StoredEvent(
             $event
