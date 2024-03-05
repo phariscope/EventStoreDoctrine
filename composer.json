@@ -12,13 +12,18 @@
             "email": "frederic.royet@logipro.com",
             "homepage": "https://www.linkedin.com/in/frederic-royet-42568566/",
             "role": "Project Founder"
+        },
+        {
+            "name": "Tom Bruder",
+            "email": "tom.bruder@logipro.com",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=8.2",
         "phariscope/event-store": "^1.1",
-        "doctrine/orm": "^2.16",
-        "symfony/cache": "^6.0|^6.3"
+        "doctrine/orm": "^2.16|^3",
+        "symfony/cache": "^6.0|^6.3|^7"
     },
     "require-dev": {
         "infection/extension-installer": "0.1.2",
