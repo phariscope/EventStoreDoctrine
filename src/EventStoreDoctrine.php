@@ -9,8 +9,10 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Phariscope\EventStore\Exceptions\EventNotFoundException;
 use Phariscope\EventStore\StoreInterface;
 use DateTimeImmutable;
+use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Schema\SchemaException;
+use Doctrine\DBAL\Tools\DsnParser;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver;
 use Doctrine\ORM\ORMSetup;
@@ -51,7 +53,10 @@ class EventStoreDoctrine extends EntityRepository implements StoreInterface
 
     private function createEntityManager(): EntityManager
     {
-        $params = ['url' => $this->getenvSafe(self::DATABASE_URL_ENV_NAME)];
+        $dsnParser = new DsnParser();
+        $url = $this->getenvSafe(self::DATABASE_URL_ENV_NAME);
+        $params = $dsnParser->parse($url);
+        $params['url'] = $url;
 
         $xmlEventFolder = __DIR__ . '/Mapping';
         $driver = new SimplifiedXmlDriver(
@@ -61,6 +66,7 @@ class EventStoreDoctrine extends EntityRepository implements StoreInterface
         );
         $config = ORMSetup::createConfiguration();
         $config->setMetadataDriverImpl($driver);
+
 
         $connection = DriverManager::getConnection($params);
 

@@ -20,7 +20,7 @@ class EventStoreDoctrineTest extends TestCase
 
     protected function setUp(): void
     {
-        putenv('DATABASE_URL=sqlite:///:memory:?cache=shared');
+        putenv('DATABASE_URL=sqlite3:///:memory:?cache=shared');
         $this->store = new EventStoreDoctrineTestPurpose();
     }
 

@@ -10,6 +10,8 @@ use Doctrine\DBAL\Types\Type;
 class DateTimeWithMicrosecondsType extends Type
 {
     private const TYPENAME = 'datetime_immutable_us';
+    private const INVALID_CONVERSION_MESSAGE = "Could not convert PHP value '%s' to type %s. " .
+    "Expected one of the following types: %s";
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
@@ -48,11 +50,24 @@ class DateTimeWithMicrosecondsType extends Type
             return $value->format('Y-m-d H:i:s.u');
         }
 
-        throw ConversionException::conversionFailedInvalidType(
+        throw $this->conversionFailedInvalidType(
             $value,
             $this->getName(),
             ['null', 'DateTimeImmutable']
         );
+    }
+
+    /**
+     * @param array<string> $types
+     */
+    private function conversionFailedInvalidType($value, string $name, array $types): ConversionException
+    {
+        return new ConversionException(sprintf(
+            self::INVALID_CONVERSION_MESSAGE,
+            strval($value),
+            $name,
+            implode(", ", $types)
+        ));
     }
 
     public function getName(): string
