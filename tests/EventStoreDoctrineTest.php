@@ -109,6 +109,7 @@ class EventStoreDoctrineTest extends TestCase
 
     public function testEnvSafePutEnv(): void
     {
+        unset($_ENV[('DATABASE_URL')]);
         $this->expectExceptionMessage("DATABASE_URL must be initialised as a string env variable");
         $this->store = new EventStoreDoctrineTestPurpose();
         $this->store->getenvSafe("Bad");
