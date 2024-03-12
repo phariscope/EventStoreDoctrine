@@ -33,11 +33,6 @@ class EventStoreDoctrineTestPurpose extends EventStoreDoctrine
         $this->getEntityManager()->detach($storedEvent);
     }
 
-    public function flush(): void
-    {
-        $this->getEntityManager()->flush();
-    }
-
     public function getenvSafe(string $envname): string
     {
         return parent::getenvSafe($envname);
