@@ -114,6 +114,11 @@ class EventStoreDoctrine extends EntityRepository implements StoreInterface
         $this->getEntityManager()->persist($storedEvent);
     }
 
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
     public function lastEvent(): StoredEvent
     {
         $query = $this->createQueryBuilder('e');
