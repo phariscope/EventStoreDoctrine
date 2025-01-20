@@ -79,7 +79,7 @@ class EventStoreDoctrine extends EntityRepository implements StoreInterface
         if (is_string($value)) {
             return $value;
         }
-        if (isset($_ENV['DATABASE_URL'])) {
+        if (isset($_ENV['DATABASE_URL']) && is_string($_ENV['DATABASE_URL'])) {
             return $_ENV['DATABASE_URL'];
         }
         throw new \Exception("DATABASE_URL must be initialised as a string env variable");
