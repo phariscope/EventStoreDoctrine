@@ -40,6 +40,7 @@ class DateTimeWithMicrosecondsType extends Type
         return \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $value);
     }
 
+    /** @param mixed $value */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         if (null === $value) {
@@ -50,6 +51,7 @@ class DateTimeWithMicrosecondsType extends Type
             return $value->format('Y-m-d H:i:s.u');
         }
 
+        /** @var bool|float|int|resource|string $value */
         throw $this->conversionFailedInvalidType(
             $value,
             $this->getName(),
@@ -58,6 +60,7 @@ class DateTimeWithMicrosecondsType extends Type
     }
 
     /**
+     * @param bool|float|int|resource|string $value
      * @param array<string> $types
      */
     private function conversionFailedInvalidType($value, string $name, array $types): ConversionException
